@@ -1,10 +1,9 @@
 
 const c = require('../config/constants');
-const userService = require('../services/userService');
+const userService = require('../services/hotelUserService');
 
 module.exports = {
-
-  create: async (req, res) => {
+   create: async (req, res) => {
     const response = { status: c.status.serverError, msg: 'Internal server error' };
     try {
       const user = req.body;

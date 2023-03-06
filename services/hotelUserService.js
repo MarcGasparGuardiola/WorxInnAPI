@@ -1,9 +1,9 @@
-const { User } = require('../sequelize')
+const { HotelUser } = require('../sequelize')
 
 module.exports.selectById = async (userId) => {
   const response = { status: false };
   try {
-    const resFromRepo = await User.findAll({
+    const resFromRepo = await HotelUser.findAll({
       where: {
         id: userId
       }
@@ -24,18 +24,7 @@ module.exports.selectById = async (userId) => {
 module.exports.selectAll = async (queryParams, pagination) => {
   const response = { status: false };
   try {
-    const data = {
-      findQuery: queryParams,
-      model: User,
-      projection: {
-
-      }
-    };
-    if (pagination.skip && pagination.limit) {
-      data.skip = pagination.skip;
-      data.limit = pagination.limit;
-    }
-    const users = await User.findAll();
+    const users = await HotelUser.findAll();
     if (users.length > 0) {
       response.result = users;
       response.status = true;
@@ -55,7 +44,7 @@ module.exports.create = async (userFromController) => {
   const response = { status: false };
   try {
     //TODO: Hash passwordA
-    const userCreated = await User.create(userFromController);
+    const userCreated = await HotelUser.create(userFromController);
     console.log(userCreated)
     if (userCreated.id) {
       response.result = userCreated;
@@ -72,7 +61,7 @@ module.exports.update = async (id, data) => {
   try {
     console.log(id)
     console.log(data)
-    const resFromRepo = await User.update(data , {
+    const resFromRepo = await HotelUser.update(data , {
       where: {
         id: id
       }
@@ -90,7 +79,7 @@ module.exports.update = async (id, data) => {
 module.exports.delete = async (userId) => {
   const response = { status: false };
   try {
-    const resFromRepo = await User.destroy({
+    const resFromRepo = await HotelUser.destroy({
       where: {
         id: userId
       }

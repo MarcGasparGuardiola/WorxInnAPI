@@ -1,13 +1,14 @@
-const { User } = require('../sequelize')
+const { Worx } = require('../sequelize')
 
-module.exports.selectById = async (userId) => {
+module.exports.selectById = async (spaceId) => {
   const response = { status: false };
   try {
-    const resFromRepo = await User.findAll({
+    const resFromRepo = await Worx.findOne({
       where: {
-        id: userId
+        id: spaceId
       }
     });
+    console.log(resFromRepo)
     if (resFromRepo) {
       response.result = resFromRepo;
       response.status = true;
@@ -16,7 +17,7 @@ module.exports.selectById = async (userId) => {
       response.status = true;
     }
   } catch (err) {
-    console.log('ERROR-userService-selectById: ', err);
+    console.log('ERROR-WorxTypeService-selectById: ', err);
   }
   return response;
 }
@@ -24,45 +25,34 @@ module.exports.selectById = async (userId) => {
 module.exports.selectAll = async (queryParams, pagination) => {
   const response = { status: false };
   try {
-    const data = {
-      findQuery: queryParams,
-      model: User,
-      projection: {
-
-      }
-    };
-    if (pagination.skip && pagination.limit) {
-      data.skip = pagination.skip;
-      data.limit = pagination.limit;
-    }
-    const users = await User.findAll();
-    if (users.length > 0) {
-      response.result = users;
+    const Spaces = await Worx.findAll();
+    if (Spaces.length > 0) {
+      response.result = Spaces;
       response.status = true;
     } else {
       response.result = {
-        msg: 'No users found'
+        msg: 'No Spaces found'
       };
       response.status = true;
     }
   } catch (err) {
-    console.log('ERROR-userService-selectAll: ', err);
+    console.log('ERROR-WorxTypeService-selectAll: ', err);
   }
   return response;
 }
 
-module.exports.create = async (userFromController) => {
+module.exports.create = async (SpaceFromController) => {
   const response = { status: false };
   try {
     //TODO: Hash passwordA
-    const userCreated = await User.create(userFromController);
-    console.log(userCreated)
-    if (userCreated.id) {
-      response.result = userCreated;
+    const SpaceCreated = await Worx.create(SpaceFromController);
+    console.log(SpaceCreated)
+    if (SpaceCreated.id) {
+      response.result = SpaceCreated;
       response.status = true;
     }
   } catch (err) {
-    console.log('ERROR-userService-create: ', err);
+    console.log('ERROR-WorxTypeService-create: ', err);
   }
   return response;
 }
@@ -72,7 +62,7 @@ module.exports.update = async (id, data) => {
   try {
     console.log(id)
     console.log(data)
-    const resFromRepo = await User.update(data , {
+    const resFromRepo = await Worx.update(data , {
       where: {
         id: id
       }
@@ -83,16 +73,16 @@ module.exports.update = async (id, data) => {
       response.status = true;
     }
   } catch (err) {
-    console.log('ERROR-userService-update: ', err);
+    console.log('ERROR-WorxTypeService-update: ', err);
   }
   return response;
 }
-module.exports.delete = async (userId) => {
+module.exports.delete = async (SpaceId) => {
   const response = { status: false };
   try {
-    const resFromRepo = await User.destroy({
+    const resFromRepo = await Worx.destroy({
       where: {
-        id: userId
+        id: SpaceId
       }
     });
     console.log(resFromRepo)
@@ -101,7 +91,7 @@ module.exports.delete = async (userId) => {
     response.status = true;
 
   } catch (err) {
-    console.log('ERROR-userService-delete: ', err);
+    console.log('ERROR-WorxTypeService-delete: ', err);
   }
   return response;
 }

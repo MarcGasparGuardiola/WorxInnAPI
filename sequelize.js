@@ -4,7 +4,11 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config/config')[env];
 
 const UserModel = require('./models/user')
-
+const HotelUserModel = require('./models/hoteluser')
+const SpaceModel = require('./models/space')
+const SpaceTypeModel = require('./models/spacetype')
+const WorxTypeModel = require('./models/worxtype')
+const WorxModel = require('./models/worx')
 
 let sequelize;
 if (config.use_env_variable) {
@@ -14,7 +18,11 @@ if (config.use_env_variable) {
 }
 
 const User = UserModel(sequelize, Sequelize)
-
+const HotelUser = HotelUserModel(sequelize, Sequelize)
+const Space = SpaceModel(sequelize, Sequelize)
+const SpaceType = SpaceTypeModel(sequelize, Sequelize)
+const WorxType = WorxTypeModel(sequelize, Sequelize)
+const Worx = WorxModel(sequelize, Sequelize)
 /*sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
@@ -22,4 +30,9 @@ const User = UserModel(sequelize, Sequelize)
 
 module.exports = {
   User,
+  HotelUser,
+  Space,
+  SpaceType,
+  WorxType,
+  Worx
 }
