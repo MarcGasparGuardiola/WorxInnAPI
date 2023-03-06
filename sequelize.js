@@ -9,6 +9,8 @@ const SpaceModel = require('./models/space')
 const SpaceTypeModel = require('./models/spacetype')
 const WorxTypeModel = require('./models/worxtype')
 const WorxModel = require('./models/worx')
+const BookingModel = require('./models/booking') 
+
 
 let sequelize;
 if (config.use_env_variable) {
@@ -23,6 +25,9 @@ const Space = SpaceModel(sequelize, Sequelize)
 const SpaceType = SpaceTypeModel(sequelize, Sequelize)
 const WorxType = WorxTypeModel(sequelize, Sequelize)
 const Worx = WorxModel(sequelize, Sequelize)
+const Booking = BookingModel(sequelize, Sequelize)
+
+
 /*sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
@@ -34,5 +39,6 @@ module.exports = {
   Space,
   SpaceType,
   WorxType,
-  Worx
+  Worx,
+  Booking
 }
