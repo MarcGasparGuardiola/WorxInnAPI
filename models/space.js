@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Space.belongsTo(models.HotelUser, { foreignKey: 'createdById', as: 'hotelUser'})
       Space.hasOne(models.SpaceType, {as: 'SpaceType'})
-      Space.hasMany(model.SpecialDeals, {as: 'SpecialDeals'})
+      Space.hasMany(models.SpecialDeals, {as: 'SpecialDeals'})
     }
   }
   Space.init({

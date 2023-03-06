@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      SpaceType.belongsToMany(models.Space, {as: 'Spaces'})
+      SpaceType.belongsTo(models.Space, { as: 'Space_SpaceType' })
     }
   }
   SpaceType.init({

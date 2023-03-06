@@ -3,6 +3,13 @@ const process = require('process');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config/config')[env];
 
+
+const fs = require('fs');
+const path = require('path');
+const basename = path.basename(__filename);
+const db = {};
+
+
 const UserModel = require('./models/user')
 const HotelUserModel = require('./models/hoteluser')
 const SpaceModel = require('./models/space')
@@ -19,6 +26,29 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+fs
+  .readdirSync(`${__dirname}/models`)
+  .filter(file => {
+    //console.log(file)
+    return (
+      file.indexOf('.') !== 0 &&
+      file !== basename &&
+      file.slice(-3) === '.js' &&
+      file.indexOf('.test.js') === -1
+    );
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, '/models/',file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  console.log(modelName)
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 const User = UserModel(sequelize, Sequelize)
 const HotelUser = HotelUserModel(sequelize, Sequelize)
 const Space = SpaceModel(sequelize, Sequelize)
@@ -28,10 +58,10 @@ const Worx = WorxModel(sequelize, Sequelize)
 const Booking = BookingModel(sequelize, Sequelize)
 const SpecialDeal = SpecialDealModel(sequelize, Sequelize)
 
-/*sequelize.sync({ force: true })
+sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
-  })*/
+  })
 
 module.exports = {
   User,
