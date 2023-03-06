@@ -20,6 +20,7 @@ app.use('/api/v1/spacetype/', require('../routes/spaceTypeRoutes'));
 app.use('/api/v1/worxtype/', require('../routes/worxTypeRoutes'));
 app.use('/api/v1/worx/', require('../routes/worxRoutes'));
 app.use('/api/v1/booking/', require('../routes/bookingRoutes'));
+app.use('/api/v1/specialdeal/', require('../routes/specialRoutesRoutes'))
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`My First API running on port: ${process.env.PORT}`);

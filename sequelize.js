@@ -10,7 +10,7 @@ const SpaceTypeModel = require('./models/spacetype')
 const WorxTypeModel = require('./models/worxtype')
 const WorxModel = require('./models/worx')
 const BookingModel = require('./models/booking') 
-
+const SpecialDealModel = require('./models/specialdeals') 
 
 let sequelize;
 if (config.use_env_variable) {
@@ -26,7 +26,7 @@ const SpaceType = SpaceTypeModel(sequelize, Sequelize)
 const WorxType = WorxTypeModel(sequelize, Sequelize)
 const Worx = WorxModel(sequelize, Sequelize)
 const Booking = BookingModel(sequelize, Sequelize)
-
+const SpecialDeal = SpecialDealModel(sequelize, Sequelize)
 
 /*sequelize.sync({ force: true })
   .then(() => {
@@ -40,5 +40,6 @@ module.exports = {
   SpaceType,
   WorxType,
   Worx,
-  Booking
+  Booking,
+  SpecialDeal
 }
