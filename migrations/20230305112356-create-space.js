@@ -9,14 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      created_by: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'HotelUser',
-          key: 'id'
-        },
-        allowNull: false
-      },
       space_type: {
         allowNull: false,
         type: Sequelize.INTEGER,

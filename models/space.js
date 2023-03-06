@@ -10,19 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      console.log(models)
       // define association here
-      Space.belongsTo(models.HotelUser, { foreignKey: 'createdById', as: 'hotelUser'})
-      Space.hasOne(models.SpaceType, {as: 'SpaceType'})
-      Space.hasMany(models.SpecialDeals, {as: 'SpecialDeals'})
+      models.Space.belongsTo(models.HotelUser, {  foreignKey: "hotelUserID", as: 'hotelUser'})
+      models.Space.hasOne(models.SpaceType, {as: 'SpaceType'})
+      models.Space.hasMany(models.SpecialDeals, {as: 'SpecialDeals'})
+      console.log("/*------------SPACE ASSOCIATE-------------*/")
     }
   }
   Space.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    created_by: {
-      type: DataTypes.INTEGER,
       allowNull: false,
     },
     details: DataTypes.STRING,

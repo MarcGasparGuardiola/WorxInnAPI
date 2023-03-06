@@ -15,9 +15,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      spaceId: {
-        type: Sequelize.INTEGER
-      },
       price: {
         type: Sequelize.DOUBLE
       },

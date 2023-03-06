@@ -3,17 +3,14 @@ const { Space } = require('../sequelize')
 module.exports.selectById = async (spaceId) => {
   const response = { status: false };
   try {
-    const resFromRepo = await Space.findOne({
-      where: {
-        id: spaceId
-      },
-      include: 'hotelUser'
-    });
+    const resFromRepo = await Space.findByPk(spaceId,
+      { include: ['hotelUser'] }
+    );
     if (resFromRepo) {
       response.result = resFromRepo;
       response.status = true;
     } else {
-      response.result = {msg: 'No user found'};
+      response.result = { msg: 'No user found' };
       response.status = true;
     }
   } catch (err) {
@@ -62,7 +59,7 @@ module.exports.update = async (id, data) => {
   try {
     console.log(id)
     console.log(data)
-    const resFromRepo = await Space.update(data , {
+    const resFromRepo = await Space.update(data, {
       where: {
         id: id
       }

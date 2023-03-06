@@ -11,14 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      SpecialDeals.belongsTo(models.Space, {as: 'Space'})
-      SpecialDeals.belongsToMany(models.Booking, { through: 'Booking_SpecialDeals' })
+      
+      
     }
   }
   SpecialDeals.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    spaceId: DataTypes.INTEGER,
     price: DataTypes.DOUBLE,
     from: DataTypes.DATE,
     to: DataTypes.DATE

@@ -9,15 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      spaceId: {
-        type: Sequelize.INTEGER
-      },
-      worxId: {
-        type: Sequelize.INTEGER
-      },
-      userId: {
-        type: Sequelize.INTEGER
-      },
       from: {
         type: Sequelize.DATE
       },

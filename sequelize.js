@@ -9,15 +9,14 @@ const path = require('path');
 const basename = path.basename(__filename);
 const db = {};
 
-
 const UserModel = require('./models/user')
 const HotelUserModel = require('./models/hoteluser')
 const SpaceModel = require('./models/space')
 const SpaceTypeModel = require('./models/spacetype')
 const WorxTypeModel = require('./models/worxtype')
 const WorxModel = require('./models/worx')
-const BookingModel = require('./models/booking') 
-const SpecialDealModel = require('./models/specialdeals') 
+const BookingModel = require('./models/booking')
+const SpecialDealModel = require('./models/specialdeals')
 
 let sequelize;
 if (config.use_env_variable) {
@@ -38,7 +37,7 @@ fs
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, '/models/',file))(sequelize, Sequelize.DataTypes);
+    const model = require(path.join(__dirname, '/models/', file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
@@ -57,6 +56,22 @@ const WorxType = WorxTypeModel(sequelize, Sequelize)
 const Worx = WorxModel(sequelize, Sequelize)
 const Booking = BookingModel(sequelize, Sequelize)
 const SpecialDeal = SpecialDealModel(sequelize, Sequelize)
+
+//Associations
+//TODO: Put associations in a separate file or in model
+Space.belongsTo(HotelUser, { foreignKey: "hotelUserID", as: 'hotelUser' })
+Space.belongsTo(SpaceType, {as: 'SpaceType'})
+
+SpecialDeal.belongsTo(Space, {as: 'Space'})
+
+Booking.belongsTo(Space, { as: 'Space' })
+Booking.belongsTo(Worx, { as: 'Worx' })
+Booking.belongsTo(User, { as: 'User' })
+Booking.belongsToMany(SpecialDeal, { through: 'Booking_SpecialDeals' })
+//HotelUser.hasMany(Space, { foreignKey: 'spaceId', as: 'spaces'})
+
+Worx.belongsTo(Space, {as: 'Space'})
+Worx.belongsTo(WorxType, {as: 'WorxType'})
 
 sequelize.sync({ force: true })
   .then(() => {
