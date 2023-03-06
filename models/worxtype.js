@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      WorxType.hasMany(models.Worx, {as: 'Worxs'})
     }
   }
   WorxType.init({

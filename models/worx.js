@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Worx.belongsTo(models.Space, {as: 'Space'})
+      Worx.hasOne(models.WorxType, {as: 'WorxType'})
     }
   }
   Worx.init({

@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Space.belongsTo(models.HotelUser, { foreignKey: 'createdById', as: 'hotelUser'})
+      Space.hasOne(models.SpaceType, {as: 'SpaceType'})
+      Space.hasMany(model.SpecialDeals, {as: 'SpecialDeals'})
     }
   }
   Space.init({

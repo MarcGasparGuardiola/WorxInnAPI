@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Booking.hasOne(models.Space, {as: 'Space'})
+      Booking.hasOne(models.Worx, {as: 'Worx'})
+      Booking.hasOne(models.User, {as: 'User'})
+      Booking.hasMany(model.SpecialDeals, {as: 'SpecialDeals'})
     }
   }
   Booking.init({
