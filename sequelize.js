@@ -17,6 +17,10 @@ const WorxTypeModel = require('./models/worxtype')
 const WorxModel = require('./models/worx')
 const BookingModel = require('./models/booking')
 const SpecialDealModel = require('./models/specialdeals')
+const ReviewModel = require('./models/review')
+const AmenitieModel = require('./models/amenitie')
+const HotelPhotoModel = require('./models/hotelphoto')
+const WorxPhotoModel = require('./models/worxphoto')
 
 let sequelize;
 if (config.use_env_variable) {
@@ -56,13 +60,19 @@ const WorxType = WorxTypeModel(sequelize, Sequelize)
 const Worx = WorxModel(sequelize, Sequelize)
 const Booking = BookingModel(sequelize, Sequelize)
 const SpecialDeal = SpecialDealModel(sequelize, Sequelize)
+const Review = ReviewModel(sequelize, Sequelize)
+const Amenitie = AmenitieModel(sequelize, Sequelize)
+const HotelPhoto = HotelPhotoModel(sequelize, Sequelize)
+const WorxPhoto = WorxPhotoModel(sequelize, Sequelize)
 
 //Associations
 //TODO: Put associations in a separate file or in model
 Space.belongsTo(HotelUser, { foreignKey: "hotelUserID", as: 'hotelUser' })
-Space.belongsTo(SpaceType, {as: 'SpaceType'})
+Space.belongsTo(SpaceType, { as: 'SpaceType' })
+Space.belongsToMany(Amenitie, { through: 'Space_Amenities' })
+Space.belongsToMany(HotelPhoto, { through: 'Space_photo' })
 
-SpecialDeal.belongsTo(Space, {as: 'Space'})
+SpecialDeal.belongsTo(Space, { as: 'Space' })
 
 Booking.belongsTo(Space, { as: 'Space' })
 Booking.belongsTo(Worx, { as: 'Worx' })
@@ -70,8 +80,15 @@ Booking.belongsTo(User, { as: 'User' })
 Booking.belongsToMany(SpecialDeal, { through: 'Booking_SpecialDeals' })
 //HotelUser.hasMany(Space, { foreignKey: 'spaceId', as: 'spaces'})
 
-Worx.belongsTo(Space, {as: 'Space'})
-Worx.belongsTo(WorxType, {as: 'WorxType'})
+Worx.belongsTo(Space, { as: 'Space' })
+Worx.belongsTo(WorxType, { as: 'WorxType' })
+Worx.belongsToMany(WorxPhoto, { through: 'Worx_Photo' })
+
+Review.belongsTo(Space, { as: 'Space' })
+Review.belongsTo(Worx, { as: 'Worx' })
+Review.belongsTo(User, { as: 'User' })
+
+
 
 sequelize.sync({ force: true })
   .then(() => {
@@ -86,5 +103,7 @@ module.exports = {
   WorxType,
   Worx,
   Booking,
-  SpecialDeal
+  SpecialDeal,
+  Amenitie,
+  Review
 }
