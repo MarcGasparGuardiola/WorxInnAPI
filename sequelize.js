@@ -105,5 +105,7 @@ module.exports = {
   Booking,
   SpecialDeal,
   Amenitie,
-  Review
+  Review,
+  HotelPhoto,
+  WorxPhoto
 }
