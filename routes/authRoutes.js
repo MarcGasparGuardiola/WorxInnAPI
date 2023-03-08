@@ -8,4 +8,8 @@ router.post(`/login`,
     joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
     authController.login);
 
+router.post(`/spaceuserlogin`,
+    joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
+    authController.spaceuserlogin);
+
 module.exports = router;

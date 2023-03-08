@@ -26,6 +26,6 @@ app.use('/api/v1/amenitie/', require('./routes/amenitieRoutes'));
 app.use('/api/v1/spacephoto/', require('./routes/spacePhotoRoutes'));
 app.use('./api/v1/worxphoto/', require('./routes/worxPhotoRoutes'));
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`My First API running on port: ${process.env.PORT}`);
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`My First API running on port: ${process.env.PORT ? process.env.PORT : 3001}`);
 });

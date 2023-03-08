@@ -1,10 +1,11 @@
 
-const { User } = require('../sequelize')
+const { User, HotelUser } = require('../sequelize')
+
 
 module.exports.login = async (user) => {
     const responseObj = { status: false };
     try {
-        const resFromRepo = await User.findAll({
+        const resFromRepo = await User.findOne({
             where: {
                 email: user.email,
                 password: user.password
@@ -17,6 +18,26 @@ module.exports.login = async (user) => {
     } catch (error) {
         responseObj.error = error;
         console.log(`ERROR-authService-login: ${error}`);
+    }
+    return responseObj;
+};
+
+module.exports.loginSpaceUser = async (user) => {
+    const responseObj = { status: false };
+    try {
+        const resFromRepo = await HotelUser.findOne({
+            where: {
+                email: user.email,
+                password: user.password
+            }
+        });
+        if (resFromRepo.length === 1) {
+            responseObj.result = resFromRepo;
+            responseObj.status = true;
+        }
+    } catch (error) {
+        responseObj.error = error;
+        console.log(`ERROR-authService-loginSpaceUser: ${error}`);
     }
     return responseObj;
 };
