@@ -21,6 +21,7 @@ const ReviewModel = require('./models/review')
 const AmenitieModel = require('./models/amenitie')
 const HotelPhotoModel = require('./models/hotelphoto')
 const WorxPhotoModel = require('./models/worxphoto')
+const BookingStateModel = require('./models/bookingstate')
 
 let sequelize;
 if (config.use_env_variable) {
@@ -64,6 +65,7 @@ const Review = ReviewModel(sequelize, Sequelize)
 const Amenitie = AmenitieModel(sequelize, Sequelize)
 const HotelPhoto = HotelPhotoModel(sequelize, Sequelize)
 const WorxPhoto = WorxPhotoModel(sequelize, Sequelize)
+const BookingState = BookingStateModel(sequelize, Sequelize)
 
 //Associations
 //TODO: Put associations in a separate file or in model
@@ -78,7 +80,7 @@ Booking.belongsTo(Space, { as: 'Space' })
 Booking.belongsTo(Worx, { as: 'Worx' })
 Booking.belongsTo(User, { as: 'User' })
 Booking.belongsToMany(SpecialDeal, { through: 'Booking_SpecialDeals' })
-//HotelUser.hasMany(Space, { foreignKey: 'spaceId', as: 'spaces'})
+Booking.belongsTo(BookingState, {as: 'BookingState'})
 
 Worx.belongsTo(Space, { as: 'Space' })
 Worx.belongsTo(WorxType, { as: 'WorxType' })
@@ -107,5 +109,6 @@ module.exports = {
   Amenitie,
   Review,
   HotelPhoto,
-  WorxPhoto
+  WorxPhoto,
+  BookingState
 }
