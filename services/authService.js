@@ -11,8 +11,11 @@ module.exports.login = async (user) => {
                 password: user.password
             }
         });
-        if (resFromRepo.length === 1) {
+        if (resFromRepo) {
             responseObj.result = resFromRepo;
+            responseObj.status = true;
+        } else {
+            responseObj.result = null;
             responseObj.status = true;
         }
     } catch (error) {
@@ -31,8 +34,11 @@ module.exports.loginSpaceUser = async (user) => {
                 password: user.password
             }
         });
-        if (resFromRepo.length === 1) {
+        if (resFromRepo) {
             responseObj.result = resFromRepo;
+            responseObj.status = true;
+        } else {
+            responseObj.result = null;
             responseObj.status = true;
         }
     } catch (error) {

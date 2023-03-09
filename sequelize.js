@@ -92,10 +92,10 @@ Review.belongsTo(User, { as: 'User' })
 
 
 
-sequelize.sync({ force: true })
+/*sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
-  })
+  })*/
 
 module.exports = {
   User,
