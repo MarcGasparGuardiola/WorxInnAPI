@@ -12,4 +12,15 @@ router.post(`/spaceuserlogin`,
     joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
     authController.spaceuserlogin);
 
+router.post(`/admin`,
+    joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
+    authController.adminLogin);
+
+router.post(`/user`,
+    joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
+    authController.userLogin);
+
+router.post(`/spaceuser`,
+    joiSchemaValidation.validate(authSchemas.loginSchema, `body`),
+    authController.spaceUserLogin);
 module.exports = router;
