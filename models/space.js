@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     tagline: DataTypes.STRING,
     website: DataTypes.STRING,
+    isVisible: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Space',

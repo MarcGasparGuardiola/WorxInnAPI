@@ -22,6 +22,7 @@ const AmenitieModel = require('./models/amenitie')
 const HotelPhotoModel = require('./models/hotelphoto')
 const WorxPhotoModel = require('./models/worxphoto')
 const BookingStateModel = require('./models/bookingstate')
+const UserTypeModel = require('./models/usertype')
 
 let sequelize;
 if (config.use_env_variable) {
@@ -66,6 +67,7 @@ const Amenitie = AmenitieModel(sequelize, Sequelize)
 const HotelPhoto = HotelPhotoModel(sequelize, Sequelize)
 const WorxPhoto = WorxPhotoModel(sequelize, Sequelize)
 const BookingState = BookingStateModel(sequelize, Sequelize)
+const UserType = UserTypeModel(sequelize, Sequelize)
 
 //Associations
 //TODO: Put associations in a separate file or in model
@@ -80,7 +82,7 @@ Booking.belongsTo(Space, { as: 'Space' })
 Booking.belongsTo(Worx, { as: 'Worx' })
 Booking.belongsTo(User, { as: 'User' })
 Booking.belongsToMany(SpecialDeal, { through: 'Booking_SpecialDeals' })
-Booking.belongsTo(BookingState, {as: 'BookingState'})
+Booking.belongsTo(BookingState, { as: 'BookingState' })
 
 Worx.belongsTo(Space, { as: 'Space' })
 Worx.belongsTo(WorxType, { as: 'WorxType' })
@@ -90,12 +92,13 @@ Review.belongsTo(Space, { as: 'Space' })
 Review.belongsTo(Worx, { as: 'Worx' })
 Review.belongsTo(User, { as: 'User' })
 
+User.belongsTo(UserType, { as: 'UserType' })
 
 
-/*sequelize.sync({ force: true })
+sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
-  })*/
+  })
 
 module.exports = {
   User,
@@ -110,5 +113,6 @@ module.exports = {
   Review,
   HotelPhoto,
   WorxPhoto,
-  BookingState
+  BookingState,
+  UserType
 }

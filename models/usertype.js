@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Worx extends Model {
+  class UserType extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,19 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Worx.belongsTo(models.Space, {as: 'Space'})
-      Worx.hasOne(models.WorxType, {as: 'WorxType'})
     }
   }
-  Worx.init({
+  UserType.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    type: DataTypes.INTEGER,
-    price: DataTypes.DOUBLE,
-    isVisible: DataTypes.BOOLEAN
+    description: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Worx',
+    modelName: 'UserType',
   });
-  return Worx;
+  return UserType;
 };
