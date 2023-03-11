@@ -24,7 +24,7 @@ router.get('/details/:id',
   bookingController.selectById
 );
 router.get('/list',
-  joiMiddleware.validate(userSchemas.selectAllSchema, 'query'),
+  //joiMiddleware.validate(userSchemas.selectAllSchema, 'query'),
   bookingController.selectAll
 );
 

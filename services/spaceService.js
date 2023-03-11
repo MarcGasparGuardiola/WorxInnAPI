@@ -21,8 +21,9 @@ module.exports.selectById = async (spaceId) => {
 
 module.exports.selectAll = async (queryParams, pagination) => {
   const response = { status: false };
+  console.log(queryParams)
   try {
-    const Spaces = await Space.findAll();
+    const Spaces = await Space.findAll({where: queryParams});
     if (Spaces.length > 0) {
       response.result = Spaces;
       response.status = true;

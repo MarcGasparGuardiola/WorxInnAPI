@@ -87,12 +87,7 @@ module.exports = {
   selectAll: async (req, res) => {
     const response = { status: c.status.serverError, msg: 'Internal server error' };
     try {
-      const queryParams = {};
-      if (req.query.active) queryParams.active = req.query.active;
-      const pagination = {};
-      if (req.query.skip) pagination.skip = +req.query.skip;
-      if (req.query.limit) pagination.limit = +req.query.limit;
-      const resFromService = await bookingService.selectAll(queryParams, pagination);
+      const resFromService = await bookingService.selectAll(res.query);
       if (resFromService.status) {
         // response.status = c.status.ok;
         // response.body = resFromService.result;

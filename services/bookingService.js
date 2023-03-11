@@ -13,7 +13,7 @@ module.exports.selectById = async (spaceId) => {
       response.result = resFromRepo;
       response.status = true;
     } else {
-      response.result = {msg: 'No booking found'};
+      response.result = { msg: 'No booking found' };
       response.status = true;
     }
   } catch (err) {
@@ -25,7 +25,9 @@ module.exports.selectById = async (spaceId) => {
 module.exports.selectAll = async (queryParams, pagination) => {
   const response = { status: false };
   try {
-    const Spaces = await Booking.findAll();
+    const Spaces = await Booking.findAll({
+      where: queryParams, include: { all: true }
+    });
     if (Spaces.length > 0) {
       response.result = Spaces;
       response.status = true;
@@ -61,7 +63,7 @@ module.exports.update = async (id, data) => {
   try {
     console.log(id)
     console.log(data)
-    const resFromRepo = await Booking.update(data , {
+    const resFromRepo = await Booking.update(data, {
       where: {
         id: id
       }

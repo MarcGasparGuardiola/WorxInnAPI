@@ -18,6 +18,9 @@ module.exports = {
       price: {
         type: Sequelize.DOUBLE
       },
+      photo: {
+        type: Sequalize.STRING(350)
+      },
       from: {
         type: Sequelize.DATE
       },

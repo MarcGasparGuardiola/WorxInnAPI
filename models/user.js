@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       }*/
     },
     profile_photo: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(350),
       allowNull: true,
       defaultValue: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngitem.com%2Fpimgs%2Fm%2F146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png&f=1&nofb=1&ipt=eb56eef89e78935c41e3d68f5570ebf8d7f6ca0dd1f7a6e1e6ea7b39a81979db&ipo=images'
     },

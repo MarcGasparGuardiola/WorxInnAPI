@@ -71,7 +71,7 @@ const UserType = UserTypeModel(sequelize, Sequelize)
 
 //Associations
 //TODO: Put associations in a separate file or in model
-Space.belongsTo(HotelUser, { foreignKey: "hotelUserID", as: 'hotelUser' })
+Space.belongsTo(User, { foreignKey: "hotelUserID", as: 'hotelUser' })
 Space.belongsTo(SpaceType, { as: 'SpaceType' })
 Space.belongsToMany(Amenitie, { through: 'Space_Amenities' })
 Space.belongsToMany(HotelPhoto, { through: 'Space_photo' })
@@ -86,6 +86,7 @@ Booking.belongsTo(BookingState, { as: 'BookingState' })
 
 Worx.belongsTo(Space, { as: 'Space' })
 Worx.belongsTo(WorxType, { as: 'WorxType' })
+Worx.belongsTo(User, { as: 'createdBy' })
 Worx.belongsToMany(WorxPhoto, { through: 'Worx_Photo' })
 
 Review.belongsTo(Space, { as: 'Space' })
@@ -94,11 +95,10 @@ Review.belongsTo(User, { as: 'User' })
 
 User.belongsTo(UserType, { as: 'UserType' })
 
-
-sequelize.sync({ force: true })
+/*sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
-  })
+  })*/
 
 module.exports = {
   User,

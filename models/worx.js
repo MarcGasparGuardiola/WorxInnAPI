@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Worx.belongsTo(models.Space, {as: 'Space'})
-      Worx.hasOne(models.WorxType, {as: 'WorxType'})
+      Worx.belongsTo(models.Space, { as: 'Space' })
+      Worx.hasOne(models.WorxType, { as: 'WorxType' })
     }
   }
   Worx.init({
@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     type: DataTypes.INTEGER,
     price: DataTypes.DOUBLE,
-    isVisible: DataTypes.BOOLEAN
+    isVisible: DataTypes.BOOLEAN,
+    main_photo: DataTypes.STRING(300)
   }, {
     sequelize,
     modelName: 'Worx',

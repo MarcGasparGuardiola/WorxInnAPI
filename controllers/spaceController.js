@@ -92,7 +92,7 @@ module.exports = {
       const pagination = {};
       if (req.query.skip) pagination.skip = +req.query.skip;
       if (req.query.limit) pagination.limit = +req.query.limit;
-      const resFromService = await spaceService.selectAll(queryParams, pagination);
+      const resFromService = await spaceService.selectAll(req.query, pagination);
       if (resFromService.status) {
         // response.status = c.status.ok;
         // response.body = resFromService.result;

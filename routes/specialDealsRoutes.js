@@ -24,7 +24,7 @@ router.get('/details/:id',
   specialDealController.selectById
 );
 router.get('/list',
-  joiMiddleware.validate(userSchemas.selectAllSchema, 'query'),
+  //joiMiddleware.validate(userSchemas.selectAllSchema, 'query'),
   specialDealController.selectAll
 );
 

@@ -24,8 +24,9 @@ module.exports.selectById = async (spaceId) => {
 
 module.exports.selectAll = async (queryParams, pagination) => {
   const response = { status: false };
+  console.log(queryParams)
   try {
-    const Spaces = await Worx.findAll();
+    const Spaces = await Worx.findAll({where: queryParams});
     if (Spaces.length > 0) {
       response.result = Spaces;
       response.status = true;
@@ -45,6 +46,7 @@ module.exports.create = async (SpaceFromController) => {
   const response = { status: false };
   try {
     //TODO: Hash passwordA
+    console.log(SpaceFromController)
     const SpaceCreated = await Worx.create(SpaceFromController);
     console.log(SpaceCreated)
     if (SpaceCreated.id) {

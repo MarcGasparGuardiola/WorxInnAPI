@@ -24,8 +24,9 @@ app.use('/api/v1/specialdeal/', require('./routes/specialDealsRoutes'));
 app.use('/api/v1/review/', require('./routes/reviewRoutes'));
 app.use('/api/v1/amenitie/', require('./routes/amenitieRoutes'));
 app.use('/api/v1/spacephoto/', require('./routes/spacePhotoRoutes'));
-app.use('./api/v1/worxphoto/', require('./routes/worxPhotoRoutes'));
-app.use('./api/v1/bookingstate', require('./routes/bookingStateRoutes'));
+app.use('/api/v1/worxphoto/', require('./routes/worxPhotoRoutes'));
+app.use('/api/v1/bookingstate', require('./routes/bookingStateRoutes'));
+app.use('/api/v1/usertype', require('./routes/userTypeRoutes'))
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`My First API running on port: ${process.env.PORT ? process.env.PORT : 3001}`);

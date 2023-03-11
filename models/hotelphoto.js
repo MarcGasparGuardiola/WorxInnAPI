@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   HotelPhoto.init({
-    photo_url: DataTypes.STRING,
+    photo_url: DataTypes.STRING(350),
     isMain: DataTypes.BOOLEAN
   }, {
     sequelize,

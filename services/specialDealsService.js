@@ -21,21 +21,10 @@ module.exports.selectById = async (userId) => {
   return response;
 }
 
-module.exports.selectAll = async (queryParams, pagination) => {
+module.exports.selectAll = async (queryParams) => {
   const response = { status: false };
   try {
-    const data = {
-      findQuery: queryParams,
-      model: SpecialDeal,
-      projection: {
-
-      }
-    };
-    if (pagination.skip && pagination.limit) {
-      data.skip = pagination.skip;
-      data.limit = pagination.limit;
-    }
-    const users = await SpecialDeal.findAll();
+    const users = await SpecialDeal.findAll({where: queryParams});
     if (users.length > 0) {
       response.result = users;
       response.status = true;
